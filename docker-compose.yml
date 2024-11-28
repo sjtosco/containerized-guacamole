@@ -2,7 +2,7 @@
 # Apache Guacamole with NGIXN reverse proxy and Let's Encrypt.
 # For more details see: https://github.com/8gears/containerized-guacamole
 # 
-version: '3'
+#version: '3'
 
 services:
   nginx:
@@ -20,6 +20,8 @@ services:
       - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx-protection/proxy.conf:/etc/nginx/proxy.conf:ro
+      - ./nginx-protection/blocked-ips.conf:/etc/nginx/blocked-ips.conf:ro
 
   nginx-letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
